@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "smart-fabric",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -16,15 +16,16 @@
   "license": "CC0-1.0",
   "icon": "assets/modid/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "main": [
-      "net.fabricmc.example.ExampleMod"
+    "client": [
+      "net.fabricmc.example.SmartFabric"
     ]
   },
   "mixins": [
     "modid.mixins.json"
   ],
+
 
   "depends": {
     "fabricloader": ">=0.14.9",
