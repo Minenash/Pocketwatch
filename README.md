@@ -1,9 +1,9 @@
-# Fabric Example Mod
+# Pocketwatch (Fabric 1.19)
 
-## Setup
+<br><center><b>Displays clocks, compasses, or other whitelisted items from your inventory next to your hotbar.</b></center>
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+![showcase](https://cdn-raw.modrinth.com/data/yRNhk5qH/images/075f4d060ceea0e50fb196b19b56a3503462bfc7.png)
 
-## License
+<br><center><b>Configuration Screen</b></center>
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+![config](https://cdn-raw.modrinth.com/data/yRNhk5qH/images/9b5c2ae11ce84058fac365f433f2803e23dcf3a9.png)
