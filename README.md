@@ -2,8 +2,8 @@
 
 <br><center><b>Displays clocks, compasses, or other whitelisted items from your inventory next to your hotbar.</b></center>
 
-![showcase](https://cdn-raw.modrinth.com/data/yRNhk5qH/images/36cdf2638c807afbe19cbe17650a35327d672f30.png)
+![showcase](https://cdn-raw.modrinth.com/data/yRNhk5qH/images/5974608d123a3999ae6d56400e39b071d0f80190.png)
 
 <br><center><b>Configuration Screen</b></center>
 
-![config](https://cdn-raw.modrinth.com/data/yRNhk5qH/images/9b5c2ae11ce84058fac365f433f2803e23dcf3a9.png)
+![config](https://cdn-raw.modrinth.com/data/yRNhk5qH/images/99c8f0edd598df4d1ea55e3373c66062d6b4c326.png)
