@@ -1,8 +1,7 @@
-package net.fabricmc.example;
+package com.minenash.pocketwatch;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -12,14 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.fabricmc.example.SmartFabricConfig;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SmartFabric extends DrawableHelper implements ClientModInitializer {
+public class Pocketwatch extends DrawableHelper implements ClientModInitializer {
 
-	public static final SmartFabricConfig CONFIG = SmartFabricConfig.createAndLoad();
+	public static final PocketwatchConfig CONFIG = PocketwatchConfig.createAndLoad();
 
 	private static final Identifier WIDGETS_TEXTURE = new Identifier("textures/gui/widgets.png");
 	private static final MinecraftClient client = MinecraftClient.getInstance();
@@ -31,7 +29,7 @@ public class SmartFabric extends DrawableHelper implements ClientModInitializer 
 		HudRenderCallback.EVENT.register(new Identifier("smart-fabric:render"), (matrices, tickDelta) -> {
 			List<ItemStack> stacks = new ArrayList<>();
 			hotbar_loop:
-			for (int i = 9; i < 36; i++) {
+			for (int i = 9; i < 36 && stacks.size() < CONFIG.slotLimit(); i++) {
 				ItemStack stack = client.player.getInventory().getStack(i);
 				if (CONFIG.whitelist().contains(Registry.ITEM.getId(stack.getItem()).toString())) {
 					for (ItemStack item : stacks)

@@ -1,0 +1,6 @@
+{
+  "text.config.pocketwatch.title": "Pocketwatch Config",
+  "text.config.pocketwatch.option.showDetails": "Show Count, Durability, and Cooldown",
+  "text.config.pocketwatch.option.slotLimit": "Slot Limit",
+  "text.config.pocketwatch.option.whitelist": "Item Whitelist"
+}

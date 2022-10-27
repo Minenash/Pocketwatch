@@ -1,4 +1,4 @@
-package net.fabricmc.example.mixin;
+package com.minenash.pocketwatch.mixin;
 
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerEntity;
