@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -68,12 +69,12 @@ public class Pocketwatch implements ClientModInitializer {
 			}
 
 			if (slots == 1)
-				context.drawTexture(OFFHAND_TEXTURE, baseX-1, y, 0, 1, 22, 22, 29, 24);
+				context.drawTexture(RenderLayer::getGuiTextured, OFFHAND_TEXTURE, baseX-1, y, 0, 1, 22, 22, 29, 24);
 			else {
-				context.drawTexture(OFFHAND_TEXTURE, baseX-1, y, 0, 1, 21, 22, 29, 24);
+				context.drawTexture(RenderLayer::getGuiTextured, OFFHAND_TEXTURE, baseX-1, y, 0, 1, 21, 22, 29, 24);
 				for (int i = 1; i < slots; i++)
-					context.drawTexture(HOTBAR_TEXTURE, baseX + i*18, y, 21, 0, 18, 22, 182, 22);
-				context.drawTexture(OFFHAND_TEXTURE, baseX + (slots)*18, y, 19, 1, 3, 22, 29, 24);
+					context.drawTexture(RenderLayer::getGuiTextured, HOTBAR_TEXTURE, baseX + i*18, y, 21, 0, 18, 22, 182, 22);
+				context.drawTexture(RenderLayer::getGuiTextured, OFFHAND_TEXTURE, baseX + (slots)*18, y, 19, 1, 3, 22, 29, 24);
 			}
 
 			for (int i = 0; i < slots; i++)
@@ -105,7 +106,7 @@ public class Pocketwatch implements ClientModInitializer {
 			context.getMatrices().pop();
 
 		if (CONFIG.showDetails())
-			context.drawItemInSlot(client.textRenderer, stack, x, y);
+			context.drawStackOverlay(client.textRenderer, stack, x, y);
 	}
 
 }

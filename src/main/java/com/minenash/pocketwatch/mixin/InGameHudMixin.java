@@ -17,10 +17,10 @@ public abstract class InGameHudMixin {
     @Shadow protected abstract PlayerEntity getCameraPlayer();
     @Shadow @Final private MinecraftClient client;
 
-    @ModifyArg(method = "renderHotbar", index = 1, at = @At(value = "INVOKE", ordinal = 4, target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIII)V"))
+    @ModifyArg(method = "renderHotbar", index = 2, at = @At(value = "INVOKE", ordinal = 4, target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIII)V"))
     private int moveIndicator(int p) { return getX(); }
 
-    @ModifyArg(method = "renderHotbar", index = 5, at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Lnet/minecraft/util/Identifier;IIIIIIII)V"))
+    @ModifyArg(method = "renderHotbar", index = 6, at = @At(value = "INVOKE", ordinal = 0, target = "Lnet/minecraft/client/gui/DrawContext;drawGuiTexture(Ljava/util/function/Function;Lnet/minecraft/util/Identifier;IIIIIIII)V"))
     private int moveIndicator2(int p) { return getX(); }
 
     @Unique private int getX() {
