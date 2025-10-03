@@ -1,11 +1,12 @@
 package com.minenash.pocketwatch;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -32,7 +33,8 @@ public class Pocketwatch implements ClientModInitializer {
 		CONFIG.whitelist().replaceAll(id -> Identifier.of(id).toString());
 		CONFIG.subscribeToWhitelist( whitelist -> whitelist.replaceAll(id -> Identifier.of(id).toString()));
 
-		HudRenderCallback.EVENT.register(Identifier.of("pocketwatch:render"), (context, tickDelta) -> {
+		HudElementRegistry.attachElementAfter(VanillaHudElements.HOTBAR, Identifier.of("pocketwatch", "display"),
+			(context, renderTickCounter) -> {
 			if (client.options.hudHidden)
 				return;
 			List<ItemStack> stacks = new ArrayList<>();
@@ -69,12 +71,12 @@ public class Pocketwatch implements ClientModInitializer {
 			}
 
 			if (slots == 1)
-				context.drawTexture(RenderLayer::getGuiTextured, OFFHAND_TEXTURE, baseX-1, y, 0, 1, 22, 22, 29, 24);
+				context.drawTexture(RenderPipelines.GUI_TEXTURED, OFFHAND_TEXTURE, baseX-1, y, 0, 1, 22, 22, 29, 24);
 			else {
-				context.drawTexture(RenderLayer::getGuiTextured, OFFHAND_TEXTURE, baseX-1, y, 0, 1, 21, 22, 29, 24);
+				context.drawTexture(RenderPipelines.GUI_TEXTURED, OFFHAND_TEXTURE, baseX-1, y, 0, 1, 21, 22, 29, 24);
 				for (int i = 1; i < slots; i++)
-					context.drawTexture(RenderLayer::getGuiTextured, HOTBAR_TEXTURE, baseX + i*18, y, 21, 0, 18, 22, 182, 22);
-				context.drawTexture(RenderLayer::getGuiTextured, OFFHAND_TEXTURE, baseX + (slots)*18, y, 19, 1, 3, 22, 29, 24);
+					context.drawTexture(RenderPipelines.GUI_TEXTURED, HOTBAR_TEXTURE, baseX + i*18, y, 21, 0, 18, 22, 182, 22);
+				context.drawTexture(RenderPipelines.GUI_TEXTURED, OFFHAND_TEXTURE, baseX + (slots)*18, y, 19, 1, 3, 22, 29, 24);
 			}
 
 			for (int i = 0; i < slots; i++)
@@ -96,14 +98,14 @@ public class Pocketwatch implements ClientModInitializer {
 		float f = (float)stack.getBobbingAnimationTime();
 		if (f > 0.0F) {
 			float g = 1.0F + f / 5.0F;
-			context.getMatrices().push();
-			context.getMatrices().translate(x + 8, y + 12, 0.0);
-			context.getMatrices().scale(1.0F / g, (g + 1.0F) / 2.0F, 1.0F);
-			context.getMatrices().translate(-(x + 8), -(y + 12), 0.0);
+			context.getMatrices().pushMatrix();
+			context.getMatrices().translate(x + 8, y + 12);
+			context.getMatrices().scale(1.0F / g, (g + 1.0F) / 2.0F);
+			context.getMatrices().translate(-(x + 8), -(y + 12));
 		}
 		context.drawItem(stack, x, y);
 		if (f > 0.0F)
-			context.getMatrices().pop();
+			context.getMatrices().popMatrix();
 
 		if (CONFIG.showDetails())
 			context.drawStackOverlay(client.textRenderer, stack, x, y);
